@@ -594,7 +594,7 @@ def title_abstract_screening():
 
 def full_text_pdf_retrieval():
     st.header("Full Text PDF Retrieval")
-    st.write("SynthScope will pull the full text pdf files for the papers that passed the first screening.")
+    st.write("SynthScope will pull the full text pdf files for the papers that passed the first screening. You can pull the articles from the database search or upload a ris file")
     if st.button("Retrieve Full Text PDFs"):
         # Call your backend function here to retrieve full text PDFs
         pass
