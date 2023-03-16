@@ -110,5 +110,5 @@ def report_generation():
     # Call your backend function here to generate the report
         pass
 
-if name == "main":
+if __name__ == "__main__":
     main()
