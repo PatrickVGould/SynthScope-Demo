@@ -5,8 +5,6 @@ streamlit-chat
 pinecone-client
 tiktoken
 python-docx
-time
 json
 docx2pdf
-re
-time
+
