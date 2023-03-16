@@ -113,9 +113,9 @@ def search_strategy_generation():
             rationale_regex = r"Rationale:\s+(.*)"
             for i in range(10):
                 new_question_output = question_developer(
-                    original_question,
+                    user_input,
                     persona_dict["question_developer"],
-                    temperature
+                    temperature = 0.3
                     )
                 try:
                     question_only = re.search(new_question_regex, str(new_question_output)).group(1)
@@ -142,11 +142,11 @@ def search_strategy_generation():
             new_question = re.search(new_question_regex, str(new_question_output)).group(1)
             rationale = re.search(rationale_regex, str(new_question_output)).group(1)
 
-            summary.append(str((f"""Old Question: {original_question}
+            summary.append(str((f"""Old Question: {user_input}
             New Question: {new_question}
             Rationale: {rationale}
             """)))
-            summary_dict["Old Question"] = original_question
+            summary_dict["Old Question"] = user_input
             summary_dict["New Question"] = new_question
             summary_dict["Rationale"] = rationale
 
