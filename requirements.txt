@@ -5,6 +5,5 @@ streamlit-chat
 pinecone-client
 tiktoken
 python-docx
-json
 docx2pdf
 
