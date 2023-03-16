@@ -4,3 +4,6 @@ streamlit
 streamlit-chat
 pinecone-client
 tiktoken
+python-docx
+time
+json
