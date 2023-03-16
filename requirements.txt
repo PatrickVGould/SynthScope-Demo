@@ -6,4 +6,4 @@ pinecone-client
 tiktoken
 python-docx
 docx2pdf
-
+pandas
