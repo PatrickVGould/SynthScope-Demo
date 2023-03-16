@@ -1,6 +1,16 @@
 import streamlit as st
-import openai
+import re
+import json
+import base64
+import time
+import docx
+from docx.shared import Inches
+from docx2pdf import convert
 import langchain
+from langchain import PromptTemplate, LLMChain
+from langchain.chat_models import ChatOpenAI
+from search_strat import searchstrat_developer
+
 
 # Main app function
 def main():
@@ -44,6 +54,38 @@ def main():
         summary_generation()
     elif feature == "Report Generation":
         report_generation()
+
+def download_link(object_to_download, download_filename, download_link_text):
+    """
+    Generates a link to download the given object_to_download.
+    """
+    if isinstance(object_to_download, pd.DataFrame):
+        object_to_download = object_to_download.to_csv(index=False)
+
+    # Some strings <-> bytes conversions necessary here
+    b64 = base64.b64encode(object_to_download.encode()).decode()
+
+    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
+
+def search_strategy_generation():
+    st.markdown("## Generate Search Strategy")
+    user_input = st.text_input("Enter your research question:")
+    if st.button("Generate"):
+        if user_input:
+            summary_dict = searchstrat_developer(user_input)
+
+            docx_filename = str(summary_dict["File Title"]).strip('"').strip('.pdf') + ".docx"
+            pdf_filename = str(summary_dict["File Title"]).strip('"') + ".pdf"
+
+            # Display download links
+            with open('summary_file.txt', 'r', encoding='utf-8') as file:
+                summary_text = file.read()
+            st.markdown(download_link(summary_text, "summary.txt", "Download Summary as TXT"), unsafe_allow_html=True)
+            st.markdown(download_link(summary_dict, docx_filename, "Download Summary as DOCX"), unsafe_allow_html=True)
+            st.markdown(download_link(summary_dict, pdf_filename, "Download Summary as PDF"), unsafe_allow_html=True)
+
+        else:
+            st.error("Please enter a research question.")
 
 
 def search_strategy_generation():
