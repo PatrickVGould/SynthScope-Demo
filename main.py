@@ -2,6 +2,7 @@ import streamlit as st
 import base64
 import pandas as pd
 from search_strat import searchstrat_developer
+import json
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
@@ -62,6 +63,8 @@ def download_link(object_to_download, download_filename, download_link_text):
 
     return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
 
+import json
+
 def search_strategy_generation():
     st.markdown("## Generate Search Strategy")
     user_input = st.text_input("Enter your research question:")
@@ -78,6 +81,16 @@ def search_strategy_generation():
             st.markdown(download_link(summary_text, "summary.txt", "Download Summary as TXT"), unsafe_allow_html=True)
             st.markdown(download_link(summary_dict, docx_filename, "Download Summary as DOCX"), unsafe_allow_html=True)
             st.markdown(download_link(summary_dict, pdf_filename, "Download Summary as PDF"), unsafe_allow_html=True)
+
+            # Display summary_dict as neatly formatted text
+            for key, value in summary_dict.items():
+                st.markdown(f"### {key}")
+                if isinstance(value, list):
+                    st.markdown('\n'.join(value))
+                elif isinstance(value, dict):
+                    st.markdown(json.dumps(value, indent=4, ensure_ascii=False))
+                else:
+                    st.markdown(str(value))
 
         else:
             st.error("Please enter a research question.")
