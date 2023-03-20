@@ -7,6 +7,7 @@ from docx.shared import Inches
 from docx2pdf import convert
 from langchain import PromptTemplate, LLMChain
 from langchain.chat_models import ChatOpenAI
+from langchain.llms import OpenAI
 import time
 
 def question_developer(user_input, persona, temperature=0):
@@ -20,7 +21,7 @@ def question_developer(user_input, persona, temperature=0):
     prompt = PromptTemplate(template=template, input_variables=["question"])
     llm_chain = LLMChain(
         prompt=prompt,
-        llm=ChatOpenAI(temperature=temperature, max_tokens=2000),
+        llm=OpenAI(temperature=temperature, max_tokens=2000),
         verbose=False
         )
 
