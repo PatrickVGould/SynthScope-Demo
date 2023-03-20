@@ -75,10 +75,18 @@ def search_strategy_generation():
     user_input = st.text_input("Enter your research question:")
     if st.button("Generate"):
         if user_input:
-            with st.spinner("Generating search strategy..."):
+            with st.spinner("Generating enhanced research questions..."):
                 persona_dict = load_persona_dict()
                 questions = ss.develop_new_questions(user_input, persona_dict)
-                st.success("Search strategy generated!")
+                question_list = []
+                for q in questions:
+                    question_list.append(ss.get_new_question_rationale(q))
+                st.success("Research questions generated!")
+            st.markdown("**Enhanced Research Questions**")
+            for i in range(len(question_list)):
+                st.markdown(f"**Question {i+1}:** {question_list[i][0]}")
+                st.markdown(f"**Rationale:** {question_list[i][1]}")
+            
             st.write(questions)
 
 

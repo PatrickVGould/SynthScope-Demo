@@ -51,7 +51,8 @@ def get_new_question_rationale(new_question_output):
     rationale_regex = r"Rationale:\s+(.*)"
     new_question = re.search(new_question_regex, str(new_question_output)).group(1)
     rationale = re.search(rationale_regex, str(new_question_output)).group(1)
-    return new_question, rationale
+    ques_rat_list = [new_question, rationale]
+    return ques_rat_list
 
 def develop_document_title(new_question, persona_dict):
     doctitle_question = question_developer(new_question + "\nDocument Title:", persona_dict["doctitle_developer"])
