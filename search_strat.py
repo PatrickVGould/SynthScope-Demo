@@ -10,6 +10,8 @@ from langchain.chat_models import ChatOpenAI
 from langchain.llms import OpenAI
 import time
 
+openai_api_key = st.secrets["OPENAI_API_KEY"]
+
 def question_developer(user_input, persona, temperature=0):
     """
     Module to generate a new research question based on the user input and persona

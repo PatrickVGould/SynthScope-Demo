@@ -80,12 +80,19 @@ def search_strategy_generation():
                 questions = ss.develop_new_questions(user_input, persona_dict)
                 question_list = []
                 for q in questions:
-                    question_list.append(ss.get_new_question_rationale(q))
+                    text = question_list.append(ss.get_new_question_rationale(q))
+                    st.write(text)
                 st.success("Research questions generated!")
             st.markdown("**Enhanced Research Questions**")
+            options = []
+            rationale = []
             for i in range(len(question_list)):
-                st.markdown(f"**Question {i+1}:** {question_list[i][0]}")
-                st.markdown(f"**Rationale:** {question_list[i][1]}")
+                options.append(f"**Question {i+1}:** {question_list[i][0]}")
+                rationale.append(f"**Rationale {i+1}:** {question_list[i][1]}")
+            
+            st.selector(label="Select a question", options=options)
+
+
             
             st.write(questions)
 
