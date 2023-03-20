@@ -75,10 +75,10 @@ def search_strategy_generation():
     user_input = st.text_input("Enter your research question:")
     if st.button("Generate"):
         if user_input:
-            st.spinner("Generating search strategy...")
-            persona_dict = load_persona_dict()
-            questions = ss.develop_new_questions(user_input, persona_dict)
-            st.success("Search strategy generated!")
+            with st.spinner("Generating search strategy..."):
+                persona_dict = load_persona_dict()
+                questions = ss.develop_new_questions(user_input, persona_dict)
+                st.success("Search strategy generated!")
             st.write(questions)
 
 
