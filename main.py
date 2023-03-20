@@ -78,6 +78,7 @@ def search_strategy_generation():
             with st.spinner("Generating enhanced research questions..."):
                 persona_dict = load_persona_dict()
                 questions = ss.develop_new_questions(user_input, persona_dict)
+                st.write(questions)
                 question_list = []
                 for q in questions:
                     text = question_list.append(ss.get_new_question_rationale(q))
