@@ -18,7 +18,7 @@ def main():
     )
 
     st.sidebar.title("SynthScope Features")
-    feature = st.sidebar.selectbox(
+    feature = st.sidebar.radio(
         "Choose a feature",
         (
             "Select...",
