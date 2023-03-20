@@ -90,7 +90,7 @@ def search_strategy_generation():
                 options.append(f"**Question {i+1}:** {question_list[i][0]}")
                 rationale.append(f"**Rationale {i+1}:** {question_list[i][1]}")
             
-            st.selector(label="Select a question", options=options)
+            st.radio(label="Select a question", options=options, index=1)
 
 
             
